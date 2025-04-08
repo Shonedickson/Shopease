@@ -1,0 +1,39 @@
+{% extends 'customer_dashboard/customer_layout.html' %}
+{% load static %}
+{% block content %}
+<main>
+<section class="latest-product-area padding-bottom">
+<div class="container">
+<div class="row">
+<div class="col-md-12 text-center">
+<div class="section-title">
+<h2 style="color: #007bff;">Update Quantity</h2>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 offset-md-3">
+<form action="{% url 'update_quantity' %}" method="post" style="background-color: #f7f7f7; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+{% csrf_token %}
+<div class="form-group row">
+<label class="col-sm-4 col-form-label" style="color: #666;"><strong>Quantity</strong></label>
+<div class="col-sm-8">
+<input type="number" class="form-control" name="squantity" value="1" min="1" value="{{ newquantity.quantity }}" >
+
+<input type="hidden" name="sprice" required class="form-control" value="{{ newquantity.sales_price }}">
+<input type="hidden" name="olid" required class="form-control" value="{{ newquantity.order_line_id }}">
+</div>
+</div>
+<div class="form-group row">
+<div class="col-sm-12">
+<button type="submit" class="btn btn-primary" style="background-color: #007bff; border-color: #007bff;">Update Quantity</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+{% endblock %}
+

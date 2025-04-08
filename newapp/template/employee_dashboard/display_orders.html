@@ -1,0 +1,86 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-home"></i>
+        </span> Dashboard
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="row">
+      <div class="col-md-7 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-start">View  Order Details</h4>
+              <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+            </div>
+            
+
+
+
+
+<table class="table" ui-jq="footable" ui-options='{
+  "paging": {
+    "enabled": true
+  },
+  "filtering": {
+    "enabled": true
+  },
+  "sorting": {
+    "enabled": true
+             }}'>
+  <tr>
+  
+  
+      <th>customer name</th>    
+      <th>mobile number</th>
+    <th>Actions</th>
+      
+
+
+</tr>
+{% for t in tlist %}
+<tr>
+
+  <td>{{t.cust_name}}</td>
+
+  <td>{{t.phone_number}}</td>
+  <td>
+    {% if t.order_status == "progressed" %}
+        <a href="{% url 'display_orders_product' t.cust_id %}" class="btn btn-dark">View Details</a>
+    {% elif t.order_status == "scheduled" %}
+        <a href="{% url 'display_employee_details' %}" class="btn btn-danger">Schedule Details</a>
+    {% endif %}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+          </div>
+        </div>
+      </div>
+
+     
+    </div>
+    
+                  
+   
+                 
+               
+          </div>
+                  {% endblock %}

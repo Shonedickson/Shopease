@@ -1,0 +1,56 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-home"></i>
+        </span> Dashboard
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+   
+
+    <div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-start">Add sub Category</h4>
+              <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+            </div>
+            <form action="{% url 'sub_category_update_data' %}" method="post">
+             {% csrf_token %} 
+            <div class="form-group">
+            <label>Category Type</label>
+            <input type="text" name="ctype" required class="form-control" value="{{ newdata.category_type }}">
+            <input type="hidden" name="ctid" required class="form-control" value="{{ newdata.sub_category_id }}">
+            <input type="submit" value="save"class="btn btn-success">
+            <input type="submit" value="cancel"class="btn btn-danger">
+
+            
+
+
+          </form>
+            
+
+
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    
+                  
+   
+                 
+               
+          </div>
+                  {% endblock %}

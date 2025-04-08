@@ -1,0 +1,80 @@
+{% extends 'merchant_dashboard/merchant_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="col-md-2.5 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="clearfix">
+          <h4 class="card-title float-start">ADD PRODUCT</h4>
+          <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+        </div>
+        <form action="{% url 'product_save_data' %}" method="post" enctype="multipart/form-data">
+         {% csrf_token %} 
+        <div class="form-group">
+        <label>product name</label>
+              <input type="text" name="pname" required class="form-control"></div>
+
+
+
+              <div class="form-group">
+            <label>product code</label>
+            <input type="text" name="pcode" required  class="form-control">
+        
+          </div>
+
+          <div class="form-group">
+            <label>image</label>
+            <input type="file" name="pimage" required  class="form-control">
+        
+          </div>
+        
+          <div class="form-group">
+            <label>Cost price</label>
+            <input type="text" name="pcost" required  class="form-control">
+        
+          </div>
+          <div class="form-group">
+            <label>sales price</label>
+            <input type="text" name="psales" required  class="form-control">
+        
+          </div>
+
+         
+            
+            <div class="form-group">
+              <label>Category</label>
+              <select name="pcategory" id="category" required class="form-control">
+                <option value="none">Select</option>
+                {% for p in slist %}
+                  <option value="{{ p.sub_category_id }}">{{ p.category_type }}</option>  
+                {% endfor %}
+              </select>
+            </div>
+            
+    
+    
+
+            <input type="submit" class="btn btn-danger" value="save">
+   
+        
+      
+
+        
+
+
+      </form>
+        
+
+
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
+              
+
+             
+           
+      </div>
+      {% endblock %}    

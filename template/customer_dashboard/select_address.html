@@ -1,0 +1,117 @@
+{% extends 'customer_dashboard/customer_layout.html' %}
+{% load static %}
+{% block content %}
+<main>
+
+  <!-- Slider Area Start -->
+  <div class="slider-area ">
+      <!-- Mobile Menu -->
+      <div class="slider-active">
+          <div class="single-slider slider-height" data-background="assets/img/hero/h1_hero.jpg">
+              <div class="container">
+                  <div class="row d-flex align-items-center justify-content-between">
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
+                          <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                              <img src="{% static 'home/assets/img/hero/hero_man.png' %}" alt="">
+                          </div>
+                      </div>
+                      <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                          <div class="hero__caption">
+                              <span data-animation="fadeInRight" data-delay=".4s">60% Discount</span>
+                              <h1 data-animation="fadeInRight" data-delay=".6s">Winter <br> Collection</h1>
+                              <p data-animation="fadeInRight" data-delay=".8s">Best Cloth Collection By 2020!</p>
+                              <!-- Hero-btn -->
+                              <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                                  <a href="industries.html" class="btn hero-btn">Shop Now</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Slider Area End-->
+
+  <section class="latest-product-area padding-bottom">
+      <div class="container">
+          <div class="row product-btn d-flex justify-content-end align-items-end">
+              <div class="col-xl-4 col-lg-5 col-md-5">
+                  <div class="section-tittle mb-30">
+                      <h2>Latest Products</h2>
+                  </div>
+              </div>
+              <div class="col-xl-8 col-lg-7 col-md-7">
+                  <div class="properties__button f-right">
+                      <nav>
+                          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                              <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
+                              <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">New</a>
+                              <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Featured</a>
+                              <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Offer</a>
+                          </div>
+                      </nav>
+                  </div>
+              </div>
+          </div>
+
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <div class="row">
+                  <!-- My Profile Section -->
+                 
+
+                  <!-- Delivery Address Section -->
+                  <div class="col-xl-6 col-lg-6 col-md-6">
+                      <div class="card profile-card">
+                          <div class="card-head" style="background-color: #007bff; color: #fff; padding: 20px; border-radius: 10px 10px 0 0;">
+                              <h2>CHOOSE YOUR ADDRESS</h2>
+                          </div>
+                        
+                          {% for d in dlist %}
+                          <div class="address-box" style="border: 1px solid #ddd; padding: 15px; margin-bottom: 15px;">
+                              <h5>Address {{ forloop.counter }}</h5>
+                              <table class="table table-striped">
+                                  <tbody>
+                                      <tr>
+                                          <th>Area</th>
+                                          <td>{{ d.area_name }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Street</th>
+                                          <td>{{ d.street }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Building</th>
+                                          <td>{{ d.building }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Flat</th>
+                                          <td>{{ d.flat }}</td>
+                                      </tr>
+                                      <tr>
+                                          <th>Landmark</th>
+                                          <td>{{ d.landmark }}</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                              <div class="edit-btn" style="margin-top: 15px;">
+                                <form method="POST" action="{% url 'update_address' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="delivery_add_id" value="{{ d.delivery_add_id }}">  <!-- Pass the address ID -->
+                                    <button type="submit" class="btn btn-danger">Select</button>
+                                </form>
+                            </div>
+                            
+                          </div>
+                          {% endfor %}
+                        
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </section>
+
+</main>
+{% endblock %}

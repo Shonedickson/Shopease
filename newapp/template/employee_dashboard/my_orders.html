@@ -1,0 +1,67 @@
+{% extends 'employee_dashboard/employee_layout.html' %}
+{% load static %}
+{% block content %}
+<main>
+<section class="latest-product-area padding-bottom">
+<div class="container">
+<h2>My Customers</h2>
+<hr>
+<div class="row">
+<div class="col-lg-10">
+<div class="card">
+<div class="card-header">
+
+</div>
+<div class="card-body">
+
+    <table class="table table-bordered mx-auto" style="max-width: 80%; margin-top: 20px;">
+      
+    </table>
+
+    <table class="table table-bordered mx-auto" style="max-width: 80%; margin-top: 20px;">
+        
+    </table>
+
+    <table class="table table-bordered mx-auto" style="max-width: 80%; margin-top: 20px;">
+        <thead class="text-center">
+            <tr>
+                <th colspan="5"><strong>Customer Information</strong></th>
+            </tr>
+            <tr>
+                <th>Customer Name</th>
+                <th>Phone Number</th>
+                <th>Email ID</th>
+              
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in clist %}
+            <tr>
+                <td>{{ o.cust_name }}</td>
+                <td>{{ o.phone_number }}</td>
+                <td>{{ o.email_id }}</td>
+                <td><button style="background-color: #4CAF50; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; cursor: pointer;">
+                    <a href="{% url 'order_details' o.cust_id %}" style="color: white; text-decoration: none;">Order Details</a>
+                </button>
+                
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        
+    </div>
+
+    <hr>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+{% endblock %}

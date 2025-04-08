@@ -1,0 +1,79 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-home"></i>
+        </span> Dashboard
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-start">Employee Details</h4>
+              <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+            </div>
+            
+
+
+
+
+<table class="table" ui-jq="footable" ui-options='{
+  "paging": {
+    "enabled": true
+  },
+  "filtering": {
+    "enabled": true
+  },
+  "sorting": {
+    "enabled": true
+             }}'>
+  <tr>
+  
+  
+      <th>Employee Name</th>
+    
+      <th>Phone Number</th>
+    <th>Email Id</th>
+    <th>Gender</th>
+    <th>Delivery Date</th>
+    <th>Delivery time</th>
+      
+      
+
+
+</tr>
+{% for e in slist %}
+<tr>
+  <td>{{e.name}}</td>
+  <td>{{e.phone_num}}</td>
+  <td>{{e.email}}</td>
+  <td>{{e.gender}}</td>
+  <td>{{e.delivery_date}}</td>
+  <td>{{e.delivery_time}}</td>
+
+  
+</tr>
+<input type="hidden" name="e4" required class="form-control" value="{{ oid }}">
+
+{% endfor %}
+
+</table>
+
+
+          </div>
+        </div>
+      </div>
+      {% endblock %}

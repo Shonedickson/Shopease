@@ -1,0 +1,114 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-home"></i>
+        </span> Dashboard
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-start">View sub category</h4>
+              <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+            </div>
+            
+
+
+
+
+<table class="table" ui-jq="footable" ui-options='{
+  "paging": {
+    "enabled": true
+  },
+  "filtering": {
+    "enabled": true
+  },
+  "sorting": {
+    "enabled": true
+             }}'>
+  <tr>
+  
+  
+
+    
+      <th>Category Type</th>
+    <th>Actions</th>
+      
+
+
+</tr>
+{% for s in slist %}
+<tr>
+  <td>{{s.category_type}}</td>
+  
+  <td>
+    <a href="{% url 'sub_category_edit_data'  s.sub_category_id %}" class="btn btn-warning">Edit</a>
+
+
+
+    <a href="" class="btn btn-danger">Delete</a>
+    
+    
+
+  </td>
+ 
+</tr>
+
+{% endfor %}
+
+</table>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-start">Add sub Category</h4>
+              <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+            </div>
+            <form action="{% url 'sub_category_save_data' %}" method="post">
+             {% csrf_token %} 
+            <div class="form-group">
+            <label>Category Type</label>
+                  <input type="text" name="ctype" required class="form-control"></div>
+                  <input type="hidden" name="ctid" required class="form-control" value="{{cid}}">
+            <input type="submit" value="save"class="btn btn-success">
+            <input type="submit" value="cancel"class="btn btn-danger">
+
+            
+
+
+          </form>
+            
+
+
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    
+                  
+   
+                 
+               
+          </div>
+                  {% endblock %}

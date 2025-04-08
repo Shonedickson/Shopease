@@ -1,0 +1,29 @@
+{% extends 'merchant_dashboard/merchant_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="col-md-2.5 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="clearfix">
+          <h1 class="card-title float-start">CHANGE IMAGE</h1>
+          <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+        
+          <form action="{% url 'product_edit_image'  %}" method="post"enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="pimage" required>
+            <input type="hidden" name="mmm" value="{{product.product_id}}">
+            <button type="submit">Save</button>
+        </form>
+      
+      
+          
+      
+          
+  
+  
+        </div>
+      </div>
+    </div>
+  
+        {% endblock %}    
+        

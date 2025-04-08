@@ -1,0 +1,71 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-home"></i>
+        </span> Dashboard
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-5 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="clearfix">
+                  <h4 class="card-title float-start">Add Delivery Charge</h4>
+                  <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+                </div>
+                <form action="{%url 'delivery_update_data' %}" method="post">
+                 {% csrf_token %} 
+                <div class="form-group">
+              
+                     
+       
+            <label >Area</label>
+            <select name="area" id="area">
+                <option value="none">Select</option>
+                {% for a in alist %}
+                 <option value="{{a.area_id}}">{{a.area_name}}</option>
+                 {% endfor %}
+              </select>
+            
+          
+    
+                      <div class="form-group">
+                    <label>Delivery charge</label>
+                    <input type="text" name="dcharge"  value="{{newdata.delivery_charge}}"  class="form-control">
+                    <input type="hidden" name="did" required  class="form-control"value="{{newdata.delivery_charge_id}}">
+                  </div>
+                <input type="submit" value="save"class="btn btn-success">
+                <input type="submit" value="cancel"class="btn btn-danger">
+    
+                
+    
+    
+              </form>
+                
+    
+    
+              </div>
+            </div>
+          </div>
+         
+        </div>
+        
+                      
+       
+                     
+                   
+              </div>
+                      {% endblock %}

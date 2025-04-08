@@ -1,0 +1,88 @@
+{% extends 'merchant_dashboard/merchant_layout.html' %}
+{% load static %}
+{% block content %}
+
+<form action="{% url 'product_save_data' %}" method="post">
+  {% csrf_token %} 
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-home"></i>
+        </span> Dashboard
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9.5 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-start">View product</h4>
+              <a href="{% url 'add_product' %}" class=" btn btn-info"style="float: right; margin-right: 20px;">Add product</a>
+              <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+            </div>
+            
+
+
+
+
+<!-- Table structure with Bootstrap classes -->
+<table class="table" ui-jq="footable" ui-options='{
+  "paging": {
+    "enabled": true
+  },
+  "filtering": {
+    "enabled": true
+  },
+  "sorting": {
+    "enabled": true
+  }}'>
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Product Code</th>
+      <th>Image</th>
+      <th>Category</th>
+      <th>Cost Price</th>
+      <th>Sales Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in plist %}
+    <tr>
+      <td>{{ p.product_name }}</td>
+      <td>{{ p.product_code }}</td>
+      <!-- If image is stored as a URL or filename, use <img> tag -->
+      <td><img src="{% get_media_prefix %}{{ p.product_image }}" alt="Product Image" style="max-width: 100px; max-height: 100px;">  <a href="{% url 'product_change_image' prdct_id=p.product_id  %}">Change Image</a>
+      </td>
+      <!-- Display category name if the relationship is available -->
+      <td>{{ p.fk_sub_category.category_type }}</td>
+      <td>{{ p.cost_price }}</td>
+      <td>{{ p.sales_price }}</td>
+      <td>
+        <a href="{% url 'product_edit_data' p.product_id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'product_delete_data' p.product_id %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'product_details' p.product_id  %}" class="btn btn-dark">product detail</a>
+      </td>
+      
+    </tr>
+   
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+          </div>
+        </div>
+      </div>
+      {% endblock %}

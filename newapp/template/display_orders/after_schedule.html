@@ -1,0 +1,89 @@
+{% extends 'customer_dashboard/customer_layout.html' %}
+{% load static %}
+{% block content %}
+<main>
+<section class="latest-product-area padding-bottom">
+<div class="container">
+<h2>Order Summary</h2>
+<hr>
+<div class="row">
+<div class="col-lg-10">
+<div class="card">
+<div class="card-header">
+<h2 class="card-title text-center">Your shopping cart contains:
+<span>
+{% if clist|length == 0 %}
+<p>No Products</p>
+{% elif clist|length == 1 %}
+<p>Only 1 Product</p>
+{% else %}
+<p>Only {{ clist|length }} Products</p>
+{% endif %}
+</span>
+</h2>
+</div>
+<div class="card-body">
+{% if clist|length > 0 %}
+<table class="table" ui-jq="footable" ui-options='{"paging": {"enabled": true}, "Filtering": {"enabled": true}, "sorting": {"enabled": true}}'>
+<thead>
+<tr>
+<th width="100px" class="text-center">SL No.</th>
+<th width="400px" class="text-center">Product</th>
+<th width="200px" class="text-center">Quantity</th>
+<th width="200px" class="text-center">Sales Price</th>
+<th width="200px" class="text-center">Total Price</th>
+<th width="200px" class="text-center">Actions</th>
+</tr>
+</thead>
+<tbody>
+{% for i in clist %}
+<tr>
+<td class="text-center">{{ forloop.counter }}</td>
+<td class="text-center">
+<img src="{% get_media_prefix %}{{ i.product_img }}" alt="Product Image" style="max-width: 100px; max-height: 100px;">
+</td>
+<td class="text-center">
+{{ i.quantity }}
+
+<a href="{% url 'edit_quantity' i.order_line_id %}"><button style="background-color: green;">Edit</button></a>
+</td>
+<td class="text-center">{{ i.sales_price }}</td>
+<td class="text-center">{{ i.total_price }}</td>
+<td class="text-center">
+<a href="{% url 'productcart_delete_data' i.order_line_id %}">
+<button style="background-color: red;"> Delete</button>
+</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+<tfoot>
+<tr>
+<td colspan="5" class="text-right">Total:</td>
+<td class="text-center">{{ sum_total }}</td>
+</tr>
+<tr>
+<td colspan="6" class="text-center">
+<a href="{% url 'select_address'    %}">
+<button class="btn btn-primary" type="button">Choose Delivery Address</button>
+</a>
+<a href="">
+<button class="btn btn-danger" type="button">Select More Dresses</button>
+</a>
+</td>
+</tr>
+</tfoot>
+</table>
+<!-- Displaying the total sum -->
+{% else %}
+<p>Your cart is empty. Start adding products!</p>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+{% endblock %}
+

@@ -1,0 +1,69 @@
+{% extends 'admin/admin_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-home"></i>
+        </span> Dashboard
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="row">
+      <div class="col-md-7 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-start">Customer View</h4>
+              <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+            </div>
+            
+
+
+
+
+<table class="table" ui-jq="footable" ui-options='{
+  "paging": {
+    "enabled": true
+  },
+  "filtering": {
+    "enabled": true
+  },
+  "sorting": {
+    "enabled": true
+             }}'>
+  <tr>
+  
+  
+    <th>Name</th>
+    
+    <th>Phone Number</th>
+    <th>Email</th>
+
+
+</tr>
+{% for u in ulist %}
+<tr>
+    <td>{{ u.cust_name }}</td>
+    <td>{{ u.phone_number }}</td>
+    <td>{{ u.email_id }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

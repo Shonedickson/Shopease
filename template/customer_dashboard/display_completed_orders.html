@@ -1,0 +1,138 @@
+{% extends 'customer_dashboard/customer_layout.html' %}
+{% load static %}
+{% block content %}
+<main>
+<section class="latest-product-area padding-bottom">
+<div class="container">
+<h2>Order Summary</h2>
+<hr>
+<div class="row">
+<div class="col-lg-10">
+<div class="card">
+<div class="card-header">
+<h2 class="card-title text-center"> cart contains:
+<span>
+{% if clist|length == 0 %}
+<p>No Products</p>
+{% elif clist|length == 1 %}
+<p>Only 1 Product</p>
+{% else %}
+<p>Only {{ clist|length }} Products</p>
+{% endif %}
+</span>
+</h2>
+</div>
+<div class="card-body">
+{% if clist|length > 0 %}
+<table class="table" ui-jq="footable" ui-options='{"paging": {"enabled": true}, "Filtering": {"enabled": true}, "sorting": {"enabled": true}}'>
+<thead>
+<tr>
+<th width="100px" class="text-center">SL No.</th>
+<th width="400px" class="text-center">Product</th>
+<th width="200px" class="text-center">Quantity</th>
+<th width="200px" class="text-center">Sales Price</th>
+<th width="200px" class="text-center">Total Price</th>
+
+</tr>
+</thead>
+<tbody>
+{% for i in clist %}
+<tr>
+<td class="text-center">{{ forloop.counter }}</td>
+<td class="text-center">
+<img src="{% get_media_prefix %}{{ i.product_img }}" alt="Product Image" style="max-width: 100px; max-height: 100px;">
+</td>
+<td class="text-center">
+{{ i.quantity }}
+
+</td>
+<td class="text-center">{{ i.sales_price }}</td>
+<td class="text-center">{{ i.total_price }}</td>
+
+
+
+
+      
+        
+</tr>
+
+
+</tbody>
+<tfoot>
+<tr>
+<td colspan="1" class="text-right"> Net Amount:</td>
+<td class="text-center">{{ sum_total }}</td>
+</tr>
+<tr>
+    <td colspan="1" class="text-right">Delivery Charge:</td>
+    <td class="text-center">{{ i.delivery_charge }}</td>
+    </tr>
+<tr>
+    <td colspan="1" class="text-right">Grand Total:</td>
+    <td class="text-center">{{ i.grand_total }}</td>
+</tr>
+<tr>
+    <td colspan="1" class="text-right">Order Date:</td>
+    <td class="text-center">{{ i.order_date }}</td>
+</tr>
+<tr>
+    <td colspan="1" class="text-right">Delivery Date:</td>
+    <td class="text-center">{{ i.delivery_date }}</td>
+</tr>
+<tr>
+    <td colspan="1" class="text-right">Delivery time:</td>
+    <td class="text-center">{{ i.delivered_time }}</td>
+</tr>
+
+
+
+
+</tfoot>
+
+<table class="table table-bordered mx-auto" style="max-width: 80%; margin-top: 20px;">
+    <thead class="text-center">
+        <tr>
+            <th colspan="5"><strong>Delivery Address</strong></th>
+        </tr>
+        <tr>
+            <th>Area</th>
+            <th>Street</th>
+            <th>Building</th>
+            <th>Flat</th>
+            <th>Landmark</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ i.area_name }}</td>
+            <td>{{ i.street }}</td>
+            <td>{{ i.building }}</td>
+            <td>{{ i.flat }}</td>
+            <td>{{ i.landmark }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<td class="text-center">
+    <a href="{%url 'payment' order_id %}">
+        <button class="btn btn-primary">payment</button>
+    </a>
+  
+    </td>
+
+   
+{% endfor %}
+
+<!-- Displaying the total sum -->
+{% else %}
+<p>Your cart is empty. Start adding products!</p>
+{% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+{% endblock %}
+

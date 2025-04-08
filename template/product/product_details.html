@@ -1,0 +1,127 @@
+{% extends 'merchant_dashboard/merchant_layout.html' %}
+{% load static %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+          <i class="mdi mdi-home"></i>
+        </span> Dashboard
+      </h3>
+      <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="row">
+      <div class="col-md-7 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-start">View details</h4>
+              <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+            </div>
+            
+
+
+
+
+<table class="table" ui-jq="footable" ui-options='{
+  "paging": {
+    "enabled": true
+  },
+  "filtering": {
+    "enabled": true
+  },
+  "sorting": {
+    "enabled": true
+             }}'>
+  <tr>
+  
+  
+      <th>size</th>
+    
+      <th>colour</th>
+    <th>Image</th>
+    <th>quantity</th>
+    <th>actions</th>
+      
+
+
+</tr>
+{% for p in plist %}
+<tr>
+    <td>{{ p.product_size }}</td>
+    <td>{{ p.product_colour }}</td>
+    <td><img src="{% get_media_prefix %}{{ p.product_img }}" alt="Product Image" style="max-width: 100px; max-height: 100px;"></td>
+    <td>{{ p.product_quantity }}</td>
+    <td>
+        <a href="{% url 'productdetails_edit_data' p.product_details_id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'productdetails_delete_data' p.product_details_id %}"class="btn btn-danger">Delete</a>
+    </td>
+</tr>
+{% endfor %}
+
+
+</table>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <div class="clearfix">
+              <h4 class="card-title float-start">Add Details</h4>
+              <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
+            </div>
+            <form action="{% url 'productdetails_save_data' %}" method="post"enctype="multipart/form-data">
+             {% csrf_token %} 
+            <div class="form-group">
+            <label>product size</label>
+                  <input type="text" name="psize" required class="form-control"></div>
+                  <div class="form-group">
+                <label>product colour</label>
+                <input type="text" name="pcolour" required  class="form-control">
+          
+              </div>
+              <div class="form-group">
+                <label>Image</label>
+                      <input type="file" name="pimage" required class="form-control">
+                     
+                    </div>
+
+
+                      <div class="form-group">
+                        <label>quantity</label>
+                              <input type="text" name="pquantity" required class="form-control"></div>
+                              <input type="hidden" name="ptid" required class="form-control" value="{{xid}}">
+                            
+            <input type="submit" value="save"class="btn btn-success">
+            <input type="submit" value="cancel"class="btn btn-danger">
+
+            
+
+
+          </form>
+            
+
+
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    
+                  
+   
+                 
+               
+          </div>
+                  {% endblock %}
